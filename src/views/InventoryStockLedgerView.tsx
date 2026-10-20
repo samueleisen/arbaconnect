@@ -116,66 +116,82 @@ export const InventoryStockLedgerView: React.FC = () => {
   return (
     <div className="flex flex-col w-full gap-space-lg">
       {/* Top Bar / Action Center */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md bg-surface-container-lowest p-space-lg rounded-xl shadow-xs border border-border-subtle/50">
-        <div className="flex flex-col gap-1">
-          <div className="flex items-center gap-space-xs text-primary font-label-md text-label-md tracking-wider uppercase font-bold">
-            <span className="material-symbols-outlined text-[16px]">warehouse</span>
-            <span>Modul Manajemen Gudang CV Arba'in • TKT 5 Validated</span>
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-surface-container-lowest p-5 rounded-xl border border-border-subtle/60">
+        <div className="flex flex-col gap-0.5 min-w-0">
+          <div className="flex items-center gap-2 text-primary text-xs uppercase tracking-wider font-semibold">
+            <span className="material-symbols-outlined text-[15px]">warehouse</span>
+            <span>Gudang CV Arba'in · Standar CDOB &amp; FEFO</span>
           </div>
-          <h1 className="font-headline-lg text-headline-lg text-on-surface tracking-tight font-bold">
+          <h1 className="text-xl text-on-surface tracking-tight font-bold">
             Kelola Stok Real-Time &amp; Buku Besar Stok (Stock Ledger)
           </h1>
-          <p className="font-body-md text-body-md text-on-surface-variant max-w-3xl">
-            Audit mutasi inventaris atomik, kalkulasi otomatis Reorder Point (ROP), &amp; kontrol FEFO batch CV Arba'in
+          <p className="text-xs text-on-surface-variant max-w-xl">
+            Audit mutasi inventaris atomik, kalkulasi otomatis Reorder Point (ROP), &amp; kontrol FEFO batch
           </p>
         </div>
-        <div className="flex flex-wrap items-center gap-space-sm">
-          <button
-            onClick={() => exportStockLedgerToCsv(ledger)}
-            className="flex items-center gap-1.5 px-3 py-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors cursor-pointer border border-border-subtle/40 shadow-xs"
-            type="button"
-            title="Unduh seluruh mutasi Stock Ledger dalam format CSV"
-          >
-            <span className="material-symbols-outlined text-[18px]">table_chart</span>
-            <span>Ekspor CSV</span>
-          </button>
-          <button
-            onClick={() => setShowPoListModal(true)}
-            className="relative flex items-center gap-1.5 px-3 py-2.5 rounded-lg bg-surface-container-high hover:bg-surface-container text-primary font-label-md text-label-md transition-colors cursor-pointer border border-border-subtle/40 shadow-xs"
-            type="button"
-          >
-            <span className="material-symbols-outlined text-[18px]">local_mall</span>
-            <span>PO Supplier</span>
-            {supplierPOs.length > 0 && (
-              <span className="px-1.5 py-0.2 rounded-full bg-primary text-white text-[11px] font-bold">
-                {supplierPOs.length}
-              </span>
-            )}
-          </button>
-          <button
-            onClick={() => setIsAdjustModalOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-2.5 rounded-lg bg-secondary-fixed text-on-secondary-fixed hover:bg-secondary-fixed-dim font-label-md text-label-md transition-colors cursor-pointer font-semibold shadow-xs"
-            type="button"
-          >
-            <span className="material-symbols-outlined text-[18px]">tune</span>
-            <span>+ Penyesuaian Opname</span>
-          </button>
-          <button
-            onClick={() => setShowPrintModal(true)}
-            className="flex items-center gap-2 px-space-md py-2.5 rounded-lg bg-surface-container-high hover:bg-surface-container text-on-surface font-label-lg text-label-lg transition-colors cursor-pointer shadow-xs"
-            type="button"
-          >
-            <span className="material-symbols-outlined text-[18px]">print</span>
-            <span>Cetak Laporan Opname</span>
-          </button>
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="flex items-center gap-2 px-space-lg py-2.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg shadow-sm transition-all transform active:scale-95 cursor-pointer"
-            type="button"
-          >
-            <span className="material-symbols-outlined text-[20px]">add_box</span>
-            <span>+ Penerimaan Barang (Batch Masuk)</span>
-          </button>
+
+        {/* Compact & Tidy Action Cluster on the Right */}
+        <div className="flex flex-col sm:items-end gap-2 shrink-0">
+          {/* Primary Operations Row */}
+          <div className="flex items-center gap-1.5 flex-wrap sm:flex-nowrap">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-primary hover:bg-primary-container text-white text-xs font-semibold whitespace-nowrap transition-colors shadow-xs active:scale-95 cursor-pointer"
+              type="button"
+              title="Input penerimaan batch herbal baru masuk gudang"
+            >
+              <span className="material-symbols-outlined text-[16px]">add_box</span>
+              <span>+ Penerimaan Batch</span>
+            </button>
+
+            <button
+              onClick={() => setIsAdjustModalOpen(true)}
+              className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer border border-border-subtle/50"
+              type="button"
+              title="Penyesuaian selisih fisik opname berkala"
+            >
+              <span className="material-symbols-outlined text-[15px] text-on-surface-variant">tune</span>
+              <span>Penyesuaian Opname</span>
+            </button>
+          </div>
+
+          {/* Secondary Report & PO Tools Row */}
+          <div className="flex items-center gap-1.5 flex-wrap sm:flex-nowrap">
+            <button
+              onClick={() => setShowPoListModal(true)}
+              className="flex items-center gap-1 px-2.5 py-1 rounded-md bg-surface-container-low hover:bg-surface-container text-primary text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer border border-border-subtle/50"
+              type="button"
+              title="Daftar Purchase Order ke Supplier Herbal"
+            >
+              <span className="material-symbols-outlined text-[15px]">local_mall</span>
+              <span>PO Supplier</span>
+              {supplierPOs.length > 0 && (
+                <span className="px-1.5 py-0.2 rounded-full bg-primary text-white text-[10px] font-bold">
+                  {supplierPOs.length}
+                </span>
+              )}
+            </button>
+
+            <button
+              onClick={() => exportStockLedgerToCsv(ledger)}
+              className="flex items-center gap-1 px-2.5 py-1 rounded-md bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer border border-border-subtle/50"
+              type="button"
+              title="Unduh seluruh mutasi Stock Ledger dalam format CSV"
+            >
+              <span className="material-symbols-outlined text-[15px] text-on-surface-variant">table_chart</span>
+              <span>Ekspor CSV</span>
+            </button>
+
+            <button
+              onClick={() => setShowPrintModal(true)}
+              className="flex items-center gap-1 px-2.5 py-1 rounded-md bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer border border-border-subtle/50"
+              type="button"
+              title="Cetak lembar formulir opname fisik gudang"
+            >
+              <span className="material-symbols-outlined text-[15px] text-on-surface-variant">print</span>
+              <span>Cetak Opname</span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -205,63 +221,63 @@ export const InventoryStockLedgerView: React.FC = () => {
         </div>
 
         {/* Card 2: Di Bawah ROP */}
-        <div className="relative overflow-hidden bg-surface-container-lowest p-space-md rounded-xl shadow-xs border border-border-subtle/40 flex flex-col justify-between">
+        <div className="bg-surface-container-lowest p-5 rounded-xl border border-border-subtle/60 flex flex-col justify-between">
           <div className="flex items-start justify-between">
             <div>
-              <div className="flex items-center gap-1.5">
-                <span className="font-label-md text-label-md text-status-warning-text uppercase tracking-wider font-semibold">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-amber-700 uppercase tracking-wider font-semibold">
                   Di Bawah ROP
                 </span>
-                <span className="w-2 h-2 rounded-full bg-badge-amber animate-ping" />
+                <span className="w-2 h-2 rounded-full bg-amber-500" />
               </div>
-              <div className="font-headline-xl text-headline-xl text-badge-amber mt-1 tracking-tight font-bold">
-                {belowRopCount} <span className="font-title-sm text-title-sm text-on-surface-variant font-normal">SKU Segera Pesan</span>
+              <div className="text-2xl text-amber-700 mt-1 tracking-tight font-bold">
+                {belowRopCount} <span className="text-xs text-on-surface-variant font-normal">SKU Segera Pesan</span>
               </div>
             </div>
-            <div className="w-10 h-10 rounded-lg bg-status-warning-bg flex items-center justify-center text-status-warning-text">
-              <span className="material-symbols-outlined text-[22px]">production_quantity_limits</span>
+            <div className="w-9 h-9 rounded-lg bg-amber-50 flex items-center justify-center text-amber-700">
+              <span className="material-symbols-outlined text-[20px]">production_quantity_limits</span>
             </div>
           </div>
-          <div className="mt-4 pt-3 bg-status-warning-bg/50 rounded-lg p-2.5 flex items-center justify-between">
-            <span className="font-body-sm text-body-sm text-status-warning-text truncate">Formula: ROP = d·L + z·σd·√L</span>
-            <span className="font-code-table text-code-table font-semibold text-status-warning-text">z=1.65 (95%)</span>
+          <div className="mt-4 pt-2.5 border-t border-border-subtle/40 flex items-center justify-between text-xs text-on-surface-variant">
+            <span>Buffer Pengaman (95%)</span>
+            <span className="font-semibold text-amber-700">Perlu Reorder Segera</span>
           </div>
         </div>
 
         {/* Card 3: Peringatan FEFO */}
-        <div className="relative overflow-hidden bg-surface-container-lowest p-space-md rounded-xl shadow-xs border border-border-subtle/40 flex flex-col justify-between">
+        <div className="bg-surface-container-lowest p-5 rounded-xl border border-border-subtle/60 flex flex-col justify-between">
           <div className="flex items-start justify-between">
             <div>
-              <span className="font-label-md text-label-md text-status-danger-text uppercase tracking-wider font-semibold">
+              <span className="text-xs text-rose-700 uppercase tracking-wider font-semibold">
                 Peringatan FEFO
               </span>
-              <div className="font-headline-xl text-headline-xl text-status-danger-text mt-1 tracking-tight font-bold">
-                {criticalExpiryCount} <span className="font-title-sm text-title-sm text-on-surface-variant font-normal">Kritis &lt;30 Hari</span>
+              <div className="text-2xl text-rose-700 mt-1 tracking-tight font-bold">
+                {criticalExpiryCount} <span className="text-xs text-on-surface-variant font-normal">Kritis &lt;30 Hari</span>
               </div>
             </div>
-            <div className="w-10 h-10 rounded-lg bg-status-danger-bg flex items-center justify-center text-status-danger-text">
-              <span className="material-symbols-outlined text-[22px]">event_busy</span>
+            <div className="w-9 h-9 rounded-lg bg-rose-50 flex items-center justify-center text-rose-700">
+              <span className="material-symbols-outlined text-[20px]">event_busy</span>
             </div>
           </div>
-          <div className="mt-4 pt-3 bg-status-danger-bg/50 rounded-lg p-2.5 flex items-center justify-between">
-            <span className="font-body-sm text-body-sm text-status-danger-text">{warningExpiryCount} Batch &lt;90 Hari</span>
-            <span className="font-code-table text-code-table font-semibold text-status-danger-text">Rp 14.200.000 Risiko</span>
+          <div className="mt-4 pt-2.5 border-t border-border-subtle/40 flex items-center justify-between text-xs text-on-surface-variant">
+            <span>{warningExpiryCount} Batch &lt;90 Hari</span>
+            <span className="font-semibold text-rose-700">Rp 14.200.000 Nilai Stok</span>
           </div>
         </div>
 
         {/* Card 4: Status Ledger Sync */}
-        <div className="relative overflow-hidden bg-surface-container-lowest p-space-md rounded-xl shadow-xs border border-border-subtle/40 flex flex-col justify-between">
+        <div className="bg-surface-container-lowest p-5 rounded-xl border border-border-subtle/60 flex flex-col justify-between">
           <div className="flex items-start justify-between">
             <div>
-              <span className="font-label-md text-label-md text-status-success-text uppercase tracking-wider font-semibold">
+              <span className="text-xs text-primary uppercase tracking-wider font-semibold">
                 Status Ledger Sync
               </span>
-              <div className="font-headline-xl text-headline-xl text-primary mt-1 tracking-tight font-bold">
-                100% <span className="font-title-sm text-title-sm text-on-surface-variant font-normal">Atomik</span>
+              <div className="text-2xl text-primary mt-1 tracking-tight font-bold">
+                100% <span className="text-xs text-on-surface-variant font-normal">Tersinkronisasi</span>
               </div>
             </div>
-            <div className="w-10 h-10 rounded-lg bg-status-success-bg flex items-center justify-center text-status-success-text">
-              <span className="material-symbols-outlined text-[22px]">enhanced_encryption</span>
+            <div className="w-9 h-9 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-700">
+              <span className="material-symbols-outlined text-[20px]">enhanced_encryption</span>
             </div>
           </div>
           <div className="mt-4 pt-3 bg-status-success-bg/50 rounded-lg p-2.5 flex items-center justify-between">
@@ -544,10 +560,10 @@ export const InventoryStockLedgerView: React.FC = () => {
                         <span
                           className={`w-2 h-2 rounded-full ${
                             isCriticalExp
-                              ? 'bg-badge-red animate-ping'
+                              ? 'bg-rose-600'
                               : isWarningExp
-                              ? 'bg-badge-amber'
-                              : 'bg-badge-green'
+                              ? 'bg-amber-500'
+                              : 'bg-emerald-600'
                           }`}
                         />
                         <span

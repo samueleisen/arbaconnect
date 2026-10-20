@@ -10,7 +10,7 @@ interface NavItem {
 }
 
 export const Sidebar: React.FC = () => {
-  const { currentPath, setPath, orders, products } = useApp();
+  const { currentPath, setPath, orders, products, isSidebarCollapsed, toggleSidebar } = useApp();
 
   const pendingOrdersCount = orders.filter(o => o.status === 'PENDING').length;
   const criticalStockCount = products.filter(p => p.status === 'below-rop' || p.status === 'critical-expiry').length;
@@ -46,59 +46,144 @@ export const Sidebar: React.FC = () => {
   ];
 
   return (
-    <aside className="fixed left-0 top-16 bottom-0 w-64 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.03)] z-40 flex flex-col justify-between py-space-md border-r border-border-subtle/50">
-      <div className="flex flex-col gap-space-xs px-space-sm">
-        <div className="px-space-md py-space-xs text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider font-semibold">
-          Navigasi Sistem
+    <>
+      {/* Dimmed backdrop when unfolded to allow clicking outside to fold */}
+      {!isSidebarCollapsed && (
+        <div
+          className="fixed inset-0 top-16 z-30 bg-black/15 cursor-pointer"
+          onClick={toggleSidebar}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Static Sidebar Panel (Overlaps statically when unfolded) */}
+      <aside
+        className={`fixed left-0 top-16 bottom-0 ${
+          isSidebarCollapsed ? 'w-16 z-20 border-r border-border-subtle/60' : 'w-64 z-40 border-r border-border-subtle/80 shadow-2xl'
+        } bg-surface-container-lowest flex flex-col justify-between py-3 select-none`}
+      >
+        {/* Navigation Items */}
+        <div className="flex flex-col gap-1 px-2">
+          <div className="flex items-center justify-between px-2 py-1 mb-1">
+            {!isSidebarCollapsed ? (
+              <span className="text-on-surface-variant text-[11px] uppercase tracking-wider font-semibold">
+                Navigasi Modul
+              </span>
+            ) : (
+              <span className="mx-auto text-[10px] text-on-surface-variant uppercase font-semibold">
+                Menu
+              </span>
+            )}
+          </div>
+
+          <nav className="flex flex-col gap-1">
+            {navItems.map((item) => {
+              const isActive = currentPath === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => {
+                    setPath(item.id);
+                    // Automatically fold sidebar upon selection if it was unfolded
+                    if (!isSidebarCollapsed) {
+                      toggleSidebar();
+                    }
+                  }}
+                  type="button"
+                  title={item.label}
+                  className={`relative flex items-center ${
+                    isSidebarCollapsed ? 'justify-center p-2.5' : 'justify-between px-3 py-2.5'
+                  } rounded-lg text-left cursor-pointer text-sm font-medium ${
+                    isActive
+                      ? 'bg-primary text-white shadow-xs'
+                      : 'text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface'
+                  }`}
+                >
+                  <div className={`flex items-center ${isSidebarCollapsed ? 'justify-center' : 'gap-3 min-w-0'}`}>
+                    <span
+                      className={`material-symbols-outlined text-[20px] shrink-0 ${
+                        isActive ? 'text-white' : 'text-primary'
+                      }`}
+                    >
+                      {item.icon}
+                    </span>
+                    {!isSidebarCollapsed && (
+                      <span className="truncate">{item.label}</span>
+                    )}
+                  </div>
+
+                  {/* Badge Indicator */}
+                  {item.badge !== undefined && (
+                    isSidebarCollapsed ? (
+                      <span
+                        className={`absolute top-1.5 right-1.5 w-2 h-2 rounded-full ${
+                          isActive ? 'bg-white' : 'bg-amber-500'
+                        }`}
+                      />
+                    ) : (
+                      <span
+                        className={`text-xs px-2 py-0.5 rounded-md font-semibold shrink-0 ml-2 ${
+                          isActive
+                            ? 'bg-white/20 text-white'
+                            : 'bg-amber-100 text-amber-800'
+                        }`}
+                      >
+                        {item.badge}
+                      </span>
+                    )
+                  )}
+                </button>
+              );
+            })}
+          </nav>
         </div>
 
-        <nav className="flex flex-col gap-1">
-          {navItems.map((item) => {
-            const isActive = currentPath === item.id;
-            return (
-              <button
-                key={item.id}
-                onClick={() => setPath(item.id)}
-                type="button"
-                className={`flex items-center justify-between px-space-md py-2.5 rounded-lg text-left transition-all cursor-pointer ${
-                  isActive
-                    ? 'bg-primary-container text-on-primary-container font-semibold shadow-xs'
-                    : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <span className={`material-symbols-outlined text-[20px] ${isActive ? 'text-on-primary-container' : 'text-primary'}`}>
-                    {item.icon}
-                  </span>
-                  <span className="font-label-lg text-label-lg">{item.label}</span>
-                </div>
-                {item.badge !== undefined && (
-                  <span
-                    className={`text-xs px-2 py-0.5 rounded-full font-bold ${
-                      isActive
-                        ? 'bg-white/20 text-white'
-                        : 'bg-badge-amber/20 text-badge-amber'
-                    }`}
-                  >
-                    {item.badge}
-                  </span>
-                )}
-              </button>
-            );
-          })}
-        </nav>
-      </div>
+        {/* Bottom Section: Audit Status & Static Fold / Unfold Button */}
+        <div className="flex flex-col gap-2 px-2">
+          {!isSidebarCollapsed ? (
+            <div className="px-3 py-2.5 bg-surface-container-low rounded-xl border border-border-subtle/50">
+              <div className="flex items-center gap-1.5 text-primary text-xs font-semibold mb-0.5">
+                <span className="material-symbols-outlined text-[15px]">verified</span>
+                <span>Integritas CDOB &amp; FEFO</span>
+              </div>
+              <p className="text-[11px] text-on-surface-variant leading-relaxed">
+                Penerapan mutasi stok tanggal kedaluwarsa terdekat aktif.
+              </p>
+            </div>
+          ) : (
+            <div
+              title="Integritas CDOB & FEFO Aktif"
+              className="w-10 h-10 mx-auto rounded-lg bg-surface-container-low flex items-center justify-center text-primary cursor-default border border-border-subtle/40"
+            >
+              <span className="material-symbols-outlined text-[18px]">verified</span>
+            </div>
+          )}
 
-      {/* Audit Readiness bottom status widget */}
-      <div className="px-space-md py-3 bg-surface-container-low/70 rounded-xl mx-space-sm border border-border-subtle/30 shadow-xs">
-        <div className="flex items-center gap-2 text-primary font-label-md text-label-md mb-1">
-          <span className="material-symbols-outlined text-[18px]">verified</span>
-          <span className="font-bold">Audit Readiness</span>
+          {/* Static Fold / Unfold Control Button at Bottom Left */}
+          <button
+            onClick={toggleSidebar}
+            type="button"
+            title={isSidebarCollapsed ? 'Buka Menu Samping' : 'Lipat Menu Samping'}
+            className={`flex items-center ${
+              isSidebarCollapsed
+                ? 'w-10 h-10 mx-auto justify-center rounded-lg bg-surface-container-low hover:bg-surface-container text-primary border border-border-subtle/50'
+                : 'justify-between px-3 py-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface border border-border-subtle/50 text-xs font-medium'
+            } cursor-pointer`}
+          >
+            {!isSidebarCollapsed ? (
+              <>
+                <span className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[16px]">dock_to_left</span>
+                  <span>Lipat Menu</span>
+                </span>
+                <span className="material-symbols-outlined text-[16px]">chevron_left</span>
+              </>
+            ) : (
+              <span className="material-symbols-outlined text-[18px]">chevron_right</span>
+            )}
+          </button>
         </div>
-        <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
-          FEFO Strict Enforcement &amp; Stock Ledger Integrity Active
-        </p>
-      </div>
-    </aside>
+      </aside>
+    </>
   );
 };

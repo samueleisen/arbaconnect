@@ -17,11 +17,13 @@ interface AppContextType {
   currentPath: NavigationPath;
   isOnline: boolean;
   isDarkMode: boolean;
+  isSidebarCollapsed: boolean;
   toast: ToastState;
   setRole: (role: UserRole) => void;
   setPath: (path: NavigationPath) => void;
   toggleOnlineStatus: () => void;
   toggleDarkMode: () => void;
+  toggleSidebar: () => void;
   showToast: (message: string, icon?: string) => void;
   addInboundBatch: (params: {
     sku: string;
@@ -89,6 +91,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [currentPath, setCurrentPath] = useState<NavigationPath>('inventory-stock-ledger');
   const [isOnline, setIsOnline] = useState<boolean>(true);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState<boolean>(true);
   const [selectedOutletId, setSelectedOutletId] = useState<string>('AP-SLO-001');
   const [toast, setToast] = useState<ToastState>({ show: false, message: '', icon: 'check_circle' });
   const [offlineQueue, setOfflineQueue] = useState<B2BOrder[]>([]);
@@ -230,6 +233,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const toggleDarkMode = () => {
     setIsDarkMode(prev => !prev);
     document.documentElement.classList.toggle('dark');
+  };
+
+  const toggleSidebar = () => {
+    setIsSidebarCollapsed(prev => !prev);
   };
 
   const addInboundBatch = ({
@@ -646,6 +653,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         currentPath,
         isOnline,
         isDarkMode,
+        isSidebarCollapsed,
         toast,
         offlineQueue,
         supplierPOs,
@@ -655,6 +663,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setPath,
         toggleOnlineStatus,
         toggleDarkMode,
+        toggleSidebar,
         showToast,
         addInboundBatch,
         createSupplierPO,

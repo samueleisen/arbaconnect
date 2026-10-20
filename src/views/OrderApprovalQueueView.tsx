@@ -87,84 +87,84 @@ export const OrderApprovalQueueView: React.FC = () => {
       {/* Top Section: Metric Ribbon & Audit Integrity Indicator */}
       <div className="flex flex-col gap-space-lg mb-space-lg">
         {/* Breadcrumb & Status Tracker */}
-        <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-space-md">
+        <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
           <div>
-            <div className="flex items-center gap-space-sm mb-1 text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider font-semibold">
-              <span>Modul Penjualan &amp; Distribusi</span>
-              <span>•</span>
-              <span className="text-primary font-bold">Otorisasi Pesanan Lapangan</span>
-              <span>•</span>
-              <span>Target TKT 5 Validated</span>
+            <div className="flex items-center gap-2 mb-1 text-on-surface-variant text-xs font-medium">
+              <span>Penjualan &amp; Distribusi</span>
+              <span aria-hidden="true">·</span>
+              <span className="text-primary font-semibold">Otorisasi Pesanan B2B</span>
+              <span aria-hidden="true">·</span>
+              <span>Kepatuhan FEFO</span>
             </div>
-            <h1 className="font-headline-xl text-headline-xl text-on-surface font-bold tracking-tight">
+            <h1 className="text-2xl text-on-surface font-bold tracking-tight">
               Antrean Verifikasi &amp; Persetujuan Pesanan B2B
             </h1>
-            <p className="font-body-md text-body-md text-on-surface-variant mt-0.5 max-w-4xl">
-              Validasi pesanan masuk dari sales lapangan PWA, alokasi stok gudang otomatis (&lt;5 detik), &amp; cetak Surat Jalan CV Arba'in dengan penegakan FEFO mutlak.
+            <p className="text-sm text-on-surface-variant mt-0.5 max-w-4xl">
+              Validasi pesanan masuk dari sales lapangan PWA, alokasi stok gudang otomatis, dan cetak Surat Jalan CV Arba'in dengan penegakan FEFO.
             </p>
           </div>
 
-          {/* Audit Badge Strip */}
-          <div className="flex items-center gap-space-sm bg-surface-container-low px-4 py-2.5 rounded-xl shadow-xs self-start xl:self-center border border-border-subtle/40">
-            <div className="w-2.5 h-2.5 rounded-full bg-badge-green animate-ping" />
+          {/* Audit & Compliance Status */}
+          <div className="flex items-center gap-3 bg-surface-container-low px-4 py-2.5 rounded-xl border border-border-subtle/50 self-start xl:self-center">
+            <span className="w-2 h-2 rounded-full bg-emerald-600" />
             <div className="flex flex-col">
-              <span className="font-label-md text-label-md text-primary font-bold">
-                Pemotongan Stok Atomik Berjalan 1.2s
+              <span className="text-xs text-on-surface font-semibold">
+                Alokasi Stok FEFO Otomatis
               </span>
-              <span className="font-code-table text-code-table text-on-surface-variant">
-                Terintegrasi Buku Besar Stok (Stock Ledger Core)
+              <span className="text-[11px] text-on-surface-variant">
+                Terhubung Buku Besar Stok Gudang
               </span>
             </div>
-            <span className="material-symbols-outlined text-primary text-[22px] ml-2">verified_user</span>
+            <span className="material-symbols-outlined text-primary text-[20px] ml-1">verified_user</span>
           </div>
         </div>
 
         {/* Status Tabs Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-space-md">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <button
             onClick={() => setActiveTab('pending')}
-            className={`flex flex-col p-space-md rounded-xl text-left transition-all cursor-pointer ${
+            className={`flex flex-col p-4 rounded-xl text-left transition-colors cursor-pointer border ${
               activeTab === 'pending'
-                ? 'bg-primary-container text-on-primary-container shadow-md scale-[1.01]'
-                : 'bg-surface-container-lowest text-on-surface shadow-xs hover:bg-surface-container-low border border-border-subtle/30'
+                ? 'bg-primary text-white border-primary shadow-xs'
+                : 'bg-surface-container-lowest text-on-surface hover:bg-surface-container-low border-border-subtle/60'
             }`}
             type="button"
           >
             <div className="flex items-center justify-between w-full mb-1">
-              <span className="font-label-sm text-label-sm uppercase tracking-wider font-semibold opacity-90">
-                Perlu Otorisasi Segera
+              <span className="text-xs uppercase tracking-wider font-semibold opacity-90">
+                Perlu Otorisasi
               </span>
-              <span className="material-symbols-outlined text-[20px]">pending_actions</span>
+              <span className="material-symbols-outlined text-[18px]">pending_actions</span>
             </div>
-            <div className="flex items-baseline gap-2">
-              <span className="font-headline-xl text-headline-xl font-bold">{pendingOrders.length}</span>
-              <span className="font-label-md text-label-md font-semibold opacity-90">Pesanan</span>
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-2xl font-bold">{pendingOrders.length}</span>
+              <span className="text-xs font-medium opacity-90">Pesanan</span>
             </div>
-            <span className="font-body-sm text-body-sm mt-1 opacity-80">Menunggu Persetujuan Admin</span>
+            <span className="text-xs mt-1 opacity-80">Menunggu Persetujuan Admin</span>
           </button>
 
           <button
             onClick={() => setActiveTab('approved')}
-            className={`flex flex-col p-space-md rounded-xl text-left transition-all cursor-pointer ${
+            className={`flex flex-col p-4 rounded-xl text-left transition-colors cursor-pointer border ${
               activeTab === 'approved'
-                ? 'bg-primary-container text-on-primary-container shadow-md scale-[1.01]'
-                : 'bg-surface-container-lowest text-on-surface shadow-xs hover:bg-surface-container-low border border-border-subtle/30'
+                ? 'bg-primary text-white border-primary shadow-xs'
+                : 'bg-surface-container-lowest text-on-surface hover:bg-surface-container-low border-border-subtle/60'
             }`}
             type="button"
           >
-            <div className="flex items-center justify-between w-full mb-1 text-on-surface-variant">
-              <span className="font-label-sm text-label-sm uppercase tracking-wider font-semibold">
-                Telah Diproses Hari Ini
+            <div className={`flex items-center justify-between w-full mb-1 ${activeTab === 'approved' ? 'text-white' : 'text-on-surface-variant'}`}>
+              <span className="text-xs uppercase tracking-wider font-semibold">
+                Diproses Hari Ini
               </span>
-              <span className="material-symbols-outlined text-badge-green text-[20px]">task_alt</span>
+              <span className="material-symbols-outlined text-[18px]">task_alt</span>
             </div>
-            <div className="flex items-baseline gap-2">
-              <span className="font-headline-xl text-headline-xl font-bold text-on-surface">
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-2xl font-bold">
                 {28 + approvedOrders.length - 1}
               </span>
-              <span className="font-label-md text-label-md text-on-surface-variant">Pesanan</span>
+              <span className={`text-xs ${activeTab === 'approved' ? 'text-white/80' : 'text-on-surface-variant'}`}>Pesanan</span>
             </div>
-            <span className="font-body-sm text-body-sm text-on-surface-variant mt-1">Telah Dikonfirmasi Hari Ini</span>
+            <span className={`text-xs mt-1 ${activeTab === 'approved' ? 'text-white/80' : 'text-on-surface-variant'}`}>Telah Dikonfirmasi</span>
           </button>
 
           <button
@@ -172,48 +172,48 @@ export const OrderApprovalQueueView: React.FC = () => {
               setActiveTab('manifest');
               showToast("Membuka 14 Manifest Faktur Pengiriman Armada Hari Ini", 'local_shipping');
             }}
-            className={`flex flex-col p-space-md rounded-xl text-left transition-all cursor-pointer ${
+            className={`flex flex-col p-4 rounded-xl text-left transition-colors cursor-pointer border ${
               activeTab === 'manifest'
-                ? 'bg-primary-container text-on-primary-container shadow-md scale-[1.01]'
-                : 'bg-surface-container-lowest text-on-surface shadow-xs hover:bg-surface-container-low border border-border-subtle/30'
+                ? 'bg-primary text-white border-primary shadow-xs'
+                : 'bg-surface-container-lowest text-on-surface hover:bg-surface-container-low border-border-subtle/60'
             }`}
             type="button"
           >
-            <div className="flex items-center justify-between w-full mb-1 text-on-surface-variant">
-              <span className="font-label-sm text-label-sm uppercase tracking-wider font-semibold">
-                Manifest Pengiriman
+            <div className={`flex items-center justify-between w-full mb-1 ${activeTab === 'manifest' ? 'text-white' : 'text-on-surface-variant'}`}>
+              <span className="text-xs uppercase tracking-wider font-semibold">
+                Manifest Armada
               </span>
-              <span className="material-symbols-outlined text-secondary text-[20px]">local_shipping</span>
+              <span className="material-symbols-outlined text-[18px]">local_shipping</span>
             </div>
-            <div className="flex items-baseline gap-2">
-              <span className="font-headline-xl text-headline-xl font-bold text-on-surface">14</span>
-              <span className="font-label-md text-label-md text-on-surface-variant">Faktur</span>
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-2xl font-bold">14</span>
+              <span className={`text-xs ${activeTab === 'manifest' ? 'text-white/80' : 'text-on-surface-variant'}`}>Faktur</span>
             </div>
-            <span className="font-body-sm text-body-sm text-on-surface-variant mt-1">Siap Dikirim / Logistik</span>
+            <span className={`text-xs mt-1 ${activeTab === 'manifest' ? 'text-white/80' : 'text-on-surface-variant'}`}>Siap Dikirim Logistik</span>
           </button>
 
           <button
             onClick={() => setActiveTab('rejected')}
-            className={`flex flex-col p-space-md rounded-xl text-left transition-all cursor-pointer ${
+            className={`flex flex-col p-4 rounded-xl text-left transition-colors cursor-pointer border ${
               activeTab === 'rejected'
-                ? 'bg-primary-container text-on-primary-container shadow-md scale-[1.01]'
-                : 'bg-surface-container-lowest text-on-surface shadow-xs hover:bg-surface-container-low border border-border-subtle/30'
+                ? 'bg-rose-700 text-white border-rose-700 shadow-xs'
+                : 'bg-surface-container-lowest text-on-surface hover:bg-surface-container-low border-border-subtle/60'
             }`}
             type="button"
           >
-            <div className="flex items-center justify-between w-full mb-1 text-on-surface-variant">
-              <span className="font-label-sm text-label-sm uppercase tracking-wider font-semibold">
-                Void / Rejeksi
+            <div className={`flex items-center justify-between w-full mb-1 ${activeTab === 'rejected' ? 'text-white' : 'text-on-surface-variant'}`}>
+              <span className="text-xs uppercase tracking-wider font-semibold">
+                Ditolak / Retur
               </span>
-              <span className="material-symbols-outlined text-badge-red text-[20px]">cancel</span>
+              <span className="material-symbols-outlined text-[18px]">cancel</span>
             </div>
-            <div className="flex items-baseline gap-2">
-              <span className="font-headline-xl text-headline-xl font-bold text-badge-red">
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-2xl font-bold">
                 {1 + rejectedOrders.length}
               </span>
-              <span className="font-label-md text-label-md text-on-surface-variant">Kasus</span>
+              <span className={`text-xs ${activeTab === 'rejected' ? 'text-white/80' : 'text-on-surface-variant'}`}>Kasus</span>
             </div>
-            <span className="font-body-sm text-body-sm text-on-surface-variant mt-1">Dibatalkan / Retur</span>
+            <span className={`text-xs mt-1 ${activeTab === 'rejected' ? 'text-white/80' : 'text-on-surface-variant'}`}>Kredit / Kuota Terlampaui</span>
           </button>
         </div>
       </div>

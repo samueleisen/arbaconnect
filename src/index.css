@@ -74,6 +74,11 @@
   --font-code-table: "Inter", monospace;
 }
 
+/* Scale desktop UI down by 10% (matches browser 90% zoom level) */
+html {
+  zoom: 0.9;
+}
+
 /* Custom font styles matching typography system */
 .font-headline-xl {
   font-family: var(--font-headline-xl);

@@ -44,58 +44,52 @@ export const ExecutiveDashboardView: React.FC = () => {
   return (
     <div className="flex flex-col w-full gap-space-lg pb-space-xl">
       {/* Top Command & Filter Bar */}
-      <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-space-md bg-surface-container-lowest p-space-lg rounded-xl shadow-xs border border-border-subtle/50">
-        <div className="flex flex-col gap-0.5">
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-primary animate-ping" />
-            <span className="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">
-              Executive Strategic Control
-            </span>
-            <span className="text-on-surface-variant text-label-sm">|</span>
-            <span className="font-code-table text-code-table text-on-surface-variant font-medium">
-              SYS-NODE: ARBA-HQ-SURAKARTA
-            </span>
+      <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4 bg-surface-container-lowest p-6 rounded-xl border border-border-subtle/60">
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center gap-2 text-xs text-on-surface-variant font-medium">
+            <span className="text-primary font-semibold">Operasional Distribusi</span>
+            <span aria-hidden="true">·</span>
+            <span>Wilayah Solo Raya</span>
+            <span aria-hidden="true">·</span>
+            <span>Standar CDOB &amp; FEFO</span>
           </div>
-          <h1 className="font-headline-lg text-headline-lg text-on-surface tracking-tight font-bold">
+          <h1 className="text-2xl text-on-surface tracking-tight font-bold">
             Executive &amp; Management Dashboard
           </h1>
-          <p className="font-body-md text-body-md text-on-surface-variant">
+          <p className="text-sm text-on-surface-variant">
             Ikhtisar Performa Penjualan B2B, Target Kunjungan Sales, &amp; Kesiapan Stok CV Arba'in
           </p>
         </div>
 
         {/* Actions & Timeline Filter */}
-        <div className="flex flex-wrap items-center gap-space-sm">
-          <div className="flex items-center bg-surface-container-low px-3 py-1.5 rounded-lg shadow-inner">
-            <span className="material-symbols-outlined text-primary text-[20px] mr-2">calendar_today</span>
+        <div className="flex flex-wrap items-center gap-2.5">
+          <div className="flex items-center bg-surface-container-low px-3 py-1.5 rounded-lg border border-border-subtle/40">
+            <span className="material-symbols-outlined text-primary text-[18px] mr-2">calendar_today</span>
             <div className="flex flex-col text-left">
-              <span className="font-label-sm text-label-sm text-on-surface-variant leading-none">
+              <span className="text-[10px] text-on-surface-variant uppercase tracking-wider font-semibold">
                 Periode Analisis
               </span>
-              <span className="font-label-lg text-label-lg text-on-surface font-semibold">
+              <span className="text-xs text-on-surface font-semibold">
                 Bulan Ini: Maret 2026
               </span>
             </div>
-            <button className="ml-3 text-on-surface-variant hover:text-primary transition-colors cursor-pointer" type="button">
-              <span className="material-symbols-outlined text-[18px]">arrow_drop_down</span>
-            </button>
           </div>
 
           <div className="flex items-center gap-2">
             <button
               onClick={handleExportExcel}
-              className="flex items-center gap-2 bg-surface-container-high hover:bg-surface-container text-on-surface font-label-md text-label-md px-3.5 py-2.5 rounded-lg transition-all active:scale-95 shadow-xs cursor-pointer"
+              className="flex items-center gap-1.5 bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-semibold px-3.5 py-2 rounded-lg border border-border-subtle/50 transition-colors cursor-pointer"
               type="button"
             >
-              <span className="material-symbols-outlined text-[18px]">table_chart</span>
+              <span className="material-symbols-outlined text-[16px]">table_chart</span>
               <span>Ekspor Excel</span>
             </button>
             <button
               onClick={handleDownloadPDF}
-              className="flex items-center gap-2 bg-primary-container hover:bg-tertiary-container text-on-primary font-label-md text-label-md px-4 py-2.5 rounded-lg shadow-sm transition-all active:scale-95 cursor-pointer"
+              className="flex items-center gap-1.5 bg-primary hover:bg-primary-container text-white text-xs font-semibold px-4 py-2 rounded-lg transition-colors cursor-pointer shadow-xs"
               type="button"
             >
-              <span className="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+              <span className="material-symbols-outlined text-[16px]">picture_as_pdf</span>
               <span>Unduh Laporan PDF</span>
             </button>
           </div>
@@ -103,130 +97,128 @@ export const ExecutiveDashboardView: React.FC = () => {
       </div>
 
       {/* Section 1: KPI Stat Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-md">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
         {/* Card 1: Omset Bulanan */}
-        <div className="bg-surface-container-lowest p-space-md rounded-xl shadow-xs border border-border-subtle/40 hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between">
-          <div className="absolute -right-4 -top-4 w-24 h-24 bg-primary/5 rounded-full blur-xl pointer-events-none" />
+        <div className="bg-surface-container-lowest p-5 rounded-xl border border-border-subtle/60 flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between mb-3">
-              <span className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider font-semibold">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs text-on-surface-variant uppercase tracking-wider font-semibold">
                 Total Omset Bulanan
               </span>
-              <span className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-status-success-bg text-status-success-text font-label-sm text-label-sm font-semibold">
-                <span className="material-symbols-outlined text-[14px]">trending_up</span>
+              <span className="flex items-center gap-0.5 text-xs font-semibold text-emerald-700">
+                <span className="material-symbols-outlined text-[15px]">trending_up</span>
                 +14.8% MoM
               </span>
             </div>
-            <div className="font-headline-xl text-headline-xl text-on-surface tracking-tight font-bold leading-none mb-1">
-              Rp 482.650<span className="text-on-surface-variant font-medium text-headline-md">.000</span>
+            <div className="text-2xl text-on-surface tracking-tight font-bold mb-1">
+              Rp 482.650<span className="text-on-surface-variant font-medium text-base">.000</span>
             </div>
-            <div className="flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant mb-2">
+            <div className="flex items-center justify-between text-xs text-on-surface-variant mb-2">
               <span>Target: Rp 500.000.000</span>
               <span className="font-semibold text-primary">96.5%</span>
             </div>
           </div>
           {/* Progress Bar */}
-          <div className="w-full bg-surface-container-high rounded-full h-2 overflow-hidden mt-2">
-            <div className="bg-primary-container h-full rounded-full transition-all duration-700" style={{ width: '96.5%' }} />
+          <div className="w-full bg-surface-container-high rounded-full h-1.5 overflow-hidden mt-1">
+            <div className="bg-primary h-full rounded-full transition-all duration-700" style={{ width: '96.5%' }} />
           </div>
         </div>
 
         {/* Card 2: Outlet B2B Aktif */}
-        <div className="bg-surface-container-lowest p-space-md rounded-xl shadow-xs border border-border-subtle/40 hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between">
+        <div className="bg-surface-container-lowest p-5 rounded-xl border border-border-subtle/60 flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between mb-3">
-              <span className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider font-semibold">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs text-on-surface-variant uppercase tracking-wider font-semibold">
                 Outlet B2B Aktif
               </span>
-              <span className="px-2 py-0.5 rounded-full bg-surface-container-low text-secondary font-label-sm text-label-sm font-semibold">
+              <span className="text-xs font-medium text-primary">
                 +6 Mitra Baru
               </span>
             </div>
             <div className="flex items-baseline gap-2 mb-1">
-              <span className="font-headline-xl text-headline-xl text-on-surface tracking-tight font-bold leading-none">
+              <span className="text-2xl text-on-surface tracking-tight font-bold">
                 148
               </span>
-              <span className="font-label-lg text-label-lg text-on-surface-variant font-medium">
+              <span className="text-xs text-on-surface-variant font-medium">
                 Titik Distribusi
               </span>
             </div>
-            <div className="flex items-center gap-1 text-label-sm font-label-sm text-on-surface-variant mt-2 mb-1.5">
-              <span className="text-primary font-bold">92 Apotek (62%)</span>
-              <span>•</span>
-              <span className="text-secondary font-bold">56 Minimarket (38%)</span>
+            <div className="flex items-center gap-1.5 text-xs text-on-surface-variant mt-2 mb-2">
+              <span className="text-on-surface font-semibold">92 Apotek (62%)</span>
+              <span aria-hidden="true">·</span>
+              <span className="text-on-surface font-semibold">56 Minimarket (38%)</span>
             </div>
           </div>
-          <div className="w-full flex rounded-full h-2 overflow-hidden bg-surface-container-high">
+          <div className="w-full flex rounded-full h-1.5 overflow-hidden bg-surface-container-high">
             <div className="bg-primary h-full" style={{ width: '62%' }} title="Apotek: 62%" />
-            <div className="bg-secondary-container h-full" style={{ width: '38%' }} title="Minimarket: 38%" />
+            <div className="bg-secondary h-full" style={{ width: '38%' }} title="Minimarket: 38%" />
           </div>
         </div>
 
         {/* Card 3: Kunjungan Sales Hari Ini */}
-        <div className="bg-surface-container-lowest p-space-md rounded-xl shadow-xs border border-border-subtle/40 hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between">
+        <div className="bg-surface-container-lowest p-5 rounded-xl border border-border-subtle/60 flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between mb-3">
-              <span className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider font-semibold">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs text-on-surface-variant uppercase tracking-wider font-semibold">
                 Kunjungan Sales Hari Ini
               </span>
-              <span className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-status-success-bg text-status-success-text font-label-sm text-label-sm font-semibold">
-                <span className="w-1.5 h-1.5 rounded-full bg-badge-green" />
+              <span className="flex items-center gap-1 text-xs font-semibold text-emerald-700">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
                 84.4% Capaian
               </span>
             </div>
-            <div className="flex items-baseline gap-2 mb-1">
-              <span className="font-headline-xl text-headline-xl text-on-surface tracking-tight font-bold leading-none">
+            <div className="flex items-baseline gap-1.5 mb-1">
+              <span className="text-2xl text-on-surface tracking-tight font-bold">
                 38
               </span>
-              <span className="font-headline-md text-headline-md text-on-surface-variant font-medium">
+              <span className="text-sm text-on-surface-variant font-medium">
                 / 45 Target
               </span>
             </div>
-            <div className="flex items-center gap-2 text-body-sm font-body-sm text-on-surface-variant mt-1 mb-2">
-              <span className="material-symbols-outlined text-[16px] text-primary">my_location</span>
-              <span>5 Sales Rep Aktif (Live GPS Verified)</span>
+            <div className="flex items-center gap-1.5 text-xs text-on-surface-variant mt-2 mb-2">
+              <span className="material-symbols-outlined text-[15px] text-primary">my_location</span>
+              <span>5 Sales Rep Aktif (GPS Terverifikasi)</span>
             </div>
           </div>
-          <div className="w-full bg-surface-container-high rounded-full h-2 overflow-hidden">
-            <div className="bg-badge-green h-full rounded-full transition-all duration-700" style={{ width: '84.4%' }} />
+          <div className="w-full bg-surface-container-high rounded-full h-1.5 overflow-hidden">
+            <div className="bg-emerald-600 h-full rounded-full transition-all duration-700" style={{ width: '84.4%' }} />
           </div>
         </div>
 
         {/* Card 4: Integritas Stok & ROP */}
-        <div className="bg-surface-container-lowest p-space-md rounded-xl shadow-xs border border-border-subtle/40 hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between">
-          <div className="absolute -right-6 -bottom-6 w-20 h-20 bg-status-warning-bg/40 rounded-full blur-xl pointer-events-none" />
+        <div className="bg-surface-container-lowest p-5 rounded-xl border border-border-subtle/60 flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between mb-3">
-              <span className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider font-semibold">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs text-on-surface-variant uppercase tracking-wider font-semibold">
                 Integritas Stok &amp; ROP
               </span>
-              <span className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-status-warning-bg text-status-warning-text font-label-sm text-label-sm font-bold">
+              <span className="flex items-center gap-1 text-xs font-semibold text-amber-700">
                 <span className="material-symbols-outlined text-[14px]">warning</span>
                 Perlu Tindakan
               </span>
             </div>
-            <div className="flex items-baseline gap-2 mb-1">
-              <span className="font-headline-xl text-headline-xl text-status-danger-text tracking-tight font-bold leading-none">
+            <div className="flex items-baseline gap-1.5 mb-1">
+              <span className="text-2xl text-rose-600 tracking-tight font-bold">
                 4
               </span>
-              <span className="font-title-sm text-title-sm text-on-surface-variant font-medium">
+              <span className="text-xs text-on-surface-variant font-medium">
                 SKU Kritis Terdeteksi
               </span>
             </div>
-            <p className="font-body-sm text-body-sm text-on-surface-variant leading-tight mt-1">
-              <span className="font-semibold text-status-danger-text">2 butuh restock</span> •{' '}
-              <span className="font-semibold text-status-warning-text">2 batch near-expiry (&lt;30 hr)</span>
+            <p className="text-xs text-on-surface-variant leading-tight mt-1 mb-2">
+              <span className="font-semibold text-rose-600">2 butuh restock</span> ·{' '}
+              <span className="font-semibold text-amber-700">2 batch near-expiry</span>
             </p>
           </div>
           <button
             onClick={() => setPath('inventory-stock-ledger')}
-            className="mt-3 flex items-center justify-between bg-surface-container-low px-2.5 py-1.5 rounded-lg text-left hover:bg-surface-container transition-colors cursor-pointer"
+            className="flex items-center justify-between bg-surface-container-low px-2.5 py-1.5 rounded-lg text-left hover:bg-surface-container transition-colors cursor-pointer border border-border-subtle/40"
             type="button"
           >
-            <span className="font-label-sm text-label-sm text-on-surface font-medium">
+            <span className="text-xs text-on-surface font-medium">
               Prioritas FEFO: Madu Habbatus
             </span>
-            <span className="material-symbols-outlined text-primary text-[18px]">chevron_right</span>
+            <span className="material-symbols-outlined text-primary text-[16px]">chevron_right</span>
           </button>
         </div>
       </div>

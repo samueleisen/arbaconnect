@@ -38,10 +38,10 @@ export const Header: React.FC = () => {
   const hasSearchResults = matchedOutlets.length > 0 || matchedProducts.length > 0 || matchedOrders.length > 0;
 
   return (
-    <header className="fixed top-0 left-0 right-0 h-16 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 border-b border-border-subtle/40">
-      <div className="h-16 w-full px-gutter-desktop flex items-center justify-between">
-        {/* Brand Logo & Name */}
-        <div className="flex items-center gap-space-md">
+    <header className="fixed top-0 left-0 right-0 h-16 bg-surface-container-lowest/95 backdrop-blur-md z-50 border-b border-border-subtle/60">
+      <div className="h-16 w-full px-gutter-desktop flex items-center justify-between gap-4">
+        {/* Brand Logo & Name - Untouched */}
+        <div className="flex items-center gap-3">
           <img
             alt="ArbaConnect Brand Logo"
             className="h-8 w-auto object-contain cursor-pointer"
@@ -49,17 +49,17 @@ export const Header: React.FC = () => {
             src="https://lh3.googleusercontent.com/aida/AEtjO1Uwe38vmG086Hh9taUzSVornhjOXOmqxRUjZh59glp8JC99KGV7BK4vzhY9IsW-fL7Zmvch7D9ibcBb7l2s2dSfeeERfruYrT3eCVKwuErwjk7ossKo-iLKZMLopcGTg2wiJTLaEjikW2CIrewYxmhL1_pIlODNnJmwNOWVkAnJQjF8q7ywGr91mXsRChhktrECPsyhySUVBYH84FPbS-LDMt_MooUBj64FbdKmPJJ5_2l9aTKuHj3zznY"
           />
           <div className="flex flex-col cursor-pointer" onClick={() => setPath('executive-dashboard')}>
-            <span className="font-title-sm text-title-sm text-primary leading-tight tracking-tight font-bold">
+            <span className="font-headline-md text-base text-primary font-bold leading-tight tracking-tight">
               ArbaConnect
             </span>
-            <span className="font-label-sm text-label-sm text-on-surface-variant leading-none">
+            <span className="text-xs text-on-surface-variant font-medium">
               CV Arba'in Logistics ERP
             </span>
           </div>
         </div>
 
         {/* Global Quick Search Bar */}
-        <div className="hidden md:flex relative max-w-sm w-full mx-4">
+        <div className="hidden md:flex relative flex-1 max-w-md mx-2">
           <span className="material-symbols-outlined text-on-surface-variant absolute left-3 top-2 text-[18px] pointer-events-none">
             search
           </span>
@@ -72,7 +72,7 @@ export const Header: React.FC = () => {
               setShowSearchDropdown(true);
             }}
             onFocus={() => setShowSearchDropdown(true)}
-            className="w-full pl-9 pr-4 py-1.5 bg-surface-container-low text-xs rounded-lg text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary border border-border-subtle/30"
+            className="w-full pl-9 pr-8 py-1.5 bg-surface-container-low text-xs rounded-lg text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary border border-border-subtle/50 transition-colors"
           />
           {searchQuery && (
             <button
@@ -81,7 +81,7 @@ export const Header: React.FC = () => {
                 setSearchQuery('');
                 setShowSearchDropdown(false);
               }}
-              className="absolute right-2 top-2 text-on-surface-variant hover:text-on-surface"
+              className="absolute right-2.5 top-2 text-on-surface-variant hover:text-on-surface cursor-pointer"
             >
               <span className="material-symbols-outlined text-[16px]">close</span>
             </button>
@@ -89,7 +89,7 @@ export const Header: React.FC = () => {
 
           {/* Search Results Dropdown */}
           {showSearchDropdown && searchQuery.trim() && (
-            <div className="absolute left-0 right-0 top-full mt-1 bg-surface-container-lowest rounded-xl shadow-xl border border-border-subtle/50 p-2 z-50 max-h-80 overflow-y-auto">
+            <div className="absolute left-0 right-0 top-full mt-1.5 bg-surface-container-lowest rounded-xl shadow-lg border border-border-subtle/80 p-2 z-50 max-h-80 overflow-y-auto">
               {hasSearchResults ? (
                 <div className="flex flex-col gap-2 text-xs">
                   {matchedOutlets.length > 0 && (
@@ -106,10 +106,10 @@ export const Header: React.FC = () => {
                             setShowSearchDropdown(false);
                             setSearchQuery('');
                           }}
-                          className="p-2 hover:bg-surface-container-low rounded-lg cursor-pointer flex items-center justify-between"
+                          className="p-2 hover:bg-surface-container-low rounded-lg cursor-pointer flex items-center justify-between transition-colors"
                         >
-                          <div className="font-semibold text-on-surface">{o.name}</div>
-                          <span className="text-[10px] text-slate-500">{o.cityName}</span>
+                          <div className="font-medium text-on-surface">{o.name}</div>
+                          <span className="text-[11px] text-on-surface-variant">{o.cityName}</span>
                         </div>
                       ))}
                     </div>
@@ -128,10 +128,10 @@ export const Header: React.FC = () => {
                             setShowSearchDropdown(false);
                             setSearchQuery('');
                           }}
-                          className="p-2 hover:bg-surface-container-low rounded-lg cursor-pointer flex items-center justify-between"
+                          className="p-2 hover:bg-surface-container-low rounded-lg cursor-pointer flex items-center justify-between transition-colors"
                         >
-                          <div className="font-semibold text-on-surface">{p.name}</div>
-                          <span className="text-[10px] font-mono text-primary font-bold">Stok: {p.stock}</span>
+                          <div className="font-medium text-on-surface">{p.name}</div>
+                          <span className="text-[11px] font-mono text-primary font-semibold">Stok: {p.stock}</span>
                         </div>
                       ))}
                     </div>
@@ -150,13 +150,13 @@ export const Header: React.FC = () => {
                             setShowSearchDropdown(false);
                             setSearchQuery('');
                           }}
-                          className="p-2 hover:bg-surface-container-low rounded-lg cursor-pointer flex items-center justify-between"
+                          className="p-2 hover:bg-surface-container-low rounded-lg cursor-pointer flex items-center justify-between transition-colors"
                         >
                           <div>
-                            <span className="font-mono font-bold text-primary">{ord.clientUuid}</span>
-                            <span className="ml-2 text-slate-600">{ord.outletName}</span>
+                            <span className="font-mono font-semibold text-primary">{ord.clientUuid}</span>
+                            <span className="ml-2 text-on-surface-variant">{ord.outletName}</span>
                           </div>
-                          <span className="font-bold text-[10px] text-emerald-700">Rp {ord.totalAmount.toLocaleString('id-ID')}</span>
+                          <span className="font-semibold text-xs text-on-surface">Rp {ord.totalAmount.toLocaleString('id-ID')}</span>
                         </div>
                       ))}
                     </div>
@@ -172,46 +172,42 @@ export const Header: React.FC = () => {
         </div>
 
         {/* Global Controls & User Info */}
-        <div className="flex items-center gap-space-md">
+        <div className="flex items-center gap-3">
           {/* Role Perspective Switcher */}
           <div className="relative flex items-center">
-            <span className="material-symbols-outlined text-on-surface-variant absolute left-2 text-[18px] pointer-events-none">
-              swap_horiz
+            <span className="material-symbols-outlined text-on-surface-variant absolute left-2.5 text-[18px] pointer-events-none">
+              tune
             </span>
             <select
               aria-label="Ganti Role Perspektif"
               value={currentRole}
               onChange={(e) => setRole(e.target.value as UserRole)}
-              className="bg-surface-container-low font-label-md text-label-md text-on-surface pl-8 pr-8 py-1.5 rounded-lg border-0 appearance-none cursor-pointer focus:outline-none focus:bg-surface-container shadow-xs hover:bg-surface-container transition-colors"
+              className="bg-surface-container-low text-xs text-on-surface pl-8 pr-7 py-1.5 rounded-lg border border-border-subtle/50 appearance-none cursor-pointer focus:outline-none focus:ring-1 focus:ring-primary hover:bg-surface-container transition-colors font-medium"
             >
-              <option value="executive">Executive Director / Management</option>
-              <option value="field-sales">Field Sales Rep (Mobile PWA)</option>
-              <option value="inventory">Inventory &amp; Warehouse Admin</option>
-              <option value="sales-ops">Sales &amp; Order Admin</option>
+              <option value="executive">Direksi &amp; Manajemen</option>
+              <option value="field-sales">Field Sales (PWA)</option>
+              <option value="inventory">Admin Gudang &amp; Stok</option>
+              <option value="sales-ops">Admin Sales &amp; Verifikasi</option>
             </select>
-            <span className="material-symbols-outlined text-on-surface-variant absolute right-2 text-[18px] pointer-events-none">
+            <span className="material-symbols-outlined text-on-surface-variant absolute right-1.5 text-[18px] pointer-events-none">
               expand_more
             </span>
           </div>
 
-          {/* Online / Network Sync Status Chip */}
+          {/* Online / Local Sync Status Indicator */}
           <button
             onClick={toggleOnlineStatus}
             type="button"
             title="Klik untuk simulasi mode Online / Offline"
-            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full transition-all cursor-pointer ${
-              isOnline
-                ? 'bg-status-success-bg text-status-success-text hover:opacity-90'
-                : 'bg-status-warning-bg text-status-warning-text hover:opacity-90'
-            }`}
+            className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg border border-border-subtle/50 bg-surface-container-low hover:bg-surface-container text-xs text-on-surface-variant font-medium transition-colors cursor-pointer"
           >
             <span
               className={`w-2 h-2 rounded-full ${
-                isOnline ? 'bg-badge-green animate-pulse' : 'bg-badge-amber'
+                isOnline ? 'bg-emerald-600' : 'bg-amber-600'
               }`}
             />
-            <span className="font-label-sm text-label-sm font-semibold">
-              {isOnline ? 'Online - All Synced' : 'Offline - Local Mode'}
+            <span className="hidden sm:inline">
+              {isOnline ? 'Tersinkron' : 'Mode Lokal'}
             </span>
           </button>
 
@@ -219,10 +215,10 @@ export const Header: React.FC = () => {
           <button
             onClick={toggleDarkMode}
             aria-label="Toggle color mode"
-            className="w-9 h-9 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors cursor-pointer"
+            className="w-8 h-8 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface border border-transparent hover:border-border-subtle/40 transition-colors cursor-pointer"
             type="button"
           >
-            <span className="material-symbols-outlined text-[20px]">
+            <span className="material-symbols-outlined text-[18px]">
               {isDarkMode ? 'light_mode' : 'dark_mode'}
             </span>
           </button>
@@ -232,20 +228,20 @@ export const Header: React.FC = () => {
             <button
               onClick={() => setShowNotifications(!showNotifications)}
               aria-label="Notifications"
-              className="relative w-9 h-9 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors cursor-pointer"
+              className="relative w-8 h-8 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface border border-transparent hover:border-border-subtle/40 transition-colors cursor-pointer"
               type="button"
             >
-              <span className="material-symbols-outlined text-[20px]">notifications</span>
+              <span className="material-symbols-outlined text-[18px]">notifications</span>
               {pendingCount > 0 && (
-                <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-badge-red ring-2 ring-surface" />
+                <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-rose-500" />
               )}
             </button>
 
             {showNotifications && (
-              <div className="absolute right-0 top-full mt-2 w-80 bg-surface-container-lowest rounded-xl shadow-2xl border border-border-subtle/50 p-3 z-50 flex flex-col gap-2">
-                <div className="flex items-center justify-between border-b pb-2">
-                  <span className="font-bold text-xs text-on-surface">Notifikasi Sistem</span>
-                  <span className="text-[10px] text-primary font-semibold">{pendingCount} Pesanan Baru</span>
+              <div className="absolute right-0 top-full mt-2 w-80 bg-surface-container-lowest rounded-xl shadow-xl border border-border-subtle/70 p-3 z-50 flex flex-col gap-2">
+                <div className="flex items-center justify-between border-b border-border-subtle/50 pb-2">
+                  <span className="font-semibold text-xs text-on-surface">Notifikasi Sistem</span>
+                  <span className="text-xs text-primary font-medium">{pendingCount} Pesanan Baru</span>
                 </div>
                 <div className="space-y-1.5 text-xs">
                   <div
@@ -253,11 +249,11 @@ export const Header: React.FC = () => {
                       setPath('order-approval-queue');
                       setShowNotifications(false);
                     }}
-                    className="p-2 bg-surface-container-low hover:bg-surface-container rounded-lg cursor-pointer flex gap-2"
+                    className="p-2 bg-surface-container-low hover:bg-surface-container rounded-lg cursor-pointer flex gap-2.5 transition-colors"
                   >
-                    <span className="material-symbols-outlined text-primary text-[18px]">shopping_bag</span>
+                    <span className="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">shopping_bag</span>
                     <div>
-                      <div className="font-semibold text-on-surface">Pesanan Baru Siap Validasi</div>
+                      <div className="font-medium text-on-surface">Pesanan Baru Siap Validasi</div>
                       <div className="text-[11px] text-on-surface-variant">Apotek Kimia Farma Slamet Riyadi (Rp 8.450.000)</div>
                     </div>
                   </div>
@@ -266,11 +262,11 @@ export const Header: React.FC = () => {
                       setPath('inventory-stock-ledger');
                       setShowNotifications(false);
                     }}
-                    className="p-2 bg-surface-container-low hover:bg-surface-container rounded-lg cursor-pointer flex gap-2"
+                    className="p-2 bg-surface-container-low hover:bg-surface-container rounded-lg cursor-pointer flex gap-2.5 transition-colors"
                   >
-                    <span className="material-symbols-outlined text-badge-amber text-[18px]">warning</span>
+                    <span className="material-symbols-outlined text-amber-600 text-[18px] shrink-0 mt-0.5">warning</span>
                     <div>
-                      <div className="font-semibold text-on-surface">Peringatan Reorder Point (ROP)</div>
+                      <div className="font-medium text-on-surface">Peringatan Reorder Point (ROP)</div>
                       <div className="text-[11px] text-on-surface-variant">Madu Randu Murni 500g mendekati safety stock</div>
                     </div>
                   </div>
@@ -279,12 +275,12 @@ export const Header: React.FC = () => {
                       showToast('Audit Kepatuhan CDOB: 99.4% Kepatuhan FEFO tervalidasi!', 'verified');
                       setShowNotifications(false);
                     }}
-                    className="p-2 bg-surface-container-low hover:bg-surface-container rounded-lg cursor-pointer flex gap-2"
+                    className="p-2 bg-surface-container-low hover:bg-surface-container rounded-lg cursor-pointer flex gap-2.5 transition-colors"
                   >
-                    <span className="material-symbols-outlined text-badge-green text-[18px]">verified</span>
+                    <span className="material-symbols-outlined text-emerald-600 text-[18px] shrink-0 mt-0.5">verified</span>
                     <div>
-                      <div className="font-semibold text-on-surface">Validasi Integritas CDOB</div>
-                      <div className="text-[11px] text-on-surface-variant">Buku besar stok diverifikasi SHA-256</div>
+                      <div className="font-medium text-on-surface">Validasi Integritas CDOB</div>
+                      <div className="text-[11px] text-on-surface-variant">Buku besar stok tervalidasi FEFO</div>
                     </div>
                   </div>
                 </div>
@@ -295,16 +291,16 @@ export const Header: React.FC = () => {
           {/* User Profile Info */}
           <div
             onClick={() => showToast(`Login sebagai: ${currentRole.toUpperCase()} (CV Arba'in Logistik)`, 'account_circle')}
-            className="flex items-center gap-space-sm pl-space-xs cursor-pointer hover:opacity-80 transition-opacity"
+            className="flex items-center gap-2 pl-2 border-l border-border-subtle/50 cursor-pointer hover:opacity-80 transition-opacity"
           >
-            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white shadow-xs">
-              <span className="material-symbols-outlined text-on-primary text-[18px]">person</span>
+            <div className="w-8 h-8 rounded-full bg-primary/10 text-primary border border-primary/20 flex items-center justify-center font-bold">
+              <span className="material-symbols-outlined text-[18px]">person</span>
             </div>
             <div className="hidden xl:flex flex-col text-left">
-              <span className="font-label-md text-label-md text-on-surface leading-tight font-semibold">
+              <span className="text-xs text-on-surface font-semibold leading-tight">
                 Admin Operasional
               </span>
-              <span className="font-label-sm text-label-sm text-on-surface-variant leading-none">
+              <span className="text-[11px] text-on-surface-variant leading-none">
                 CV Arba'in Logistik
               </span>
             </div>

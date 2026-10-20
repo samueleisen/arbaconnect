@@ -106,63 +106,65 @@ export const B2bCrmDirectoryView: React.FC = () => {
   return (
     <div className="flex flex-col w-full gap-space-lg">
       {/* Header Title & Action Toolbar */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-space-md">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div className="flex flex-col">
-          <div className="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm mb-1 uppercase tracking-wider font-semibold">
-            <span>Sistem Distribusi Wilayah Solo Raya</span>
-            <span>•</span>
-            <span className="text-primary font-bold">Modul B2B CRM v2.4</span>
+          <div className="flex items-center gap-2 text-on-surface-variant text-xs mb-1 font-medium">
+            <span>Sistem Distribusi Solo Raya</span>
+            <span aria-hidden="true">·</span>
+            <span className="text-primary font-semibold">Direktori B2B CRM</span>
+            <span aria-hidden="true">·</span>
+            <span>Relasi Apotek &amp; Ritel</span>
           </div>
-          <h1 className="font-headline-lg text-headline-lg text-on-surface tracking-tight font-bold">
+          <h1 className="text-2xl text-on-surface tracking-tight font-bold">
             Direktori CRM Pelanggan B2B &amp; Kemitraan Outlet
           </h1>
-          <p className="font-body-md text-body-md text-on-surface-variant max-w-4xl mt-0.5">
-            Basis data relasi apotek, minimarket, termin pembayaran (Credit Terms), dan rute sales lapangan CV Arba'in
+          <p className="text-sm text-on-surface-variant max-w-4xl mt-0.5">
+            Basis data kemitraan apotek, minimarket, plafon kredit, dan rute sales lapangan CV Arba'in di Solo Raya.
           </p>
         </div>
-        <div className="flex items-center gap-space-sm flex-wrap">
+        <div className="flex items-center gap-2.5 flex-wrap">
           <button
             onClick={handleExportCRM}
-            className="inline-flex items-center gap-2 px-space-md py-2.5 rounded-lg bg-surface-container-low text-on-surface hover:bg-surface-container font-label-lg text-label-lg transition-colors shadow-xs cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-surface-container-low text-on-surface hover:bg-surface-container text-xs font-semibold transition-colors border border-border-subtle/50 cursor-pointer"
             type="button"
           >
-            <span className="material-symbols-outlined text-[18px]">file_download</span>
+            <span className="material-symbols-outlined text-[16px]">file_download</span>
             <span>Ekspor Data CRM</span>
           </button>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="inline-flex items-center gap-2 px-space-md py-2.5 rounded-lg bg-primary text-on-primary hover:bg-tertiary font-label-lg text-label-lg transition-colors shadow-sm cursor-pointer active:scale-95"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-white hover:bg-primary-container text-xs font-semibold transition-colors shadow-xs cursor-pointer active:scale-95"
             type="button"
           >
-            <span className="material-symbols-outlined text-[18px]">add_business</span>
+            <span className="material-symbols-outlined text-[16px]">add_business</span>
             <span>+ Daftarkan Outlet Baru</span>
           </button>
         </div>
       </div>
 
       {/* Summary Metrics Cards (4 Metrics Grid) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Card 1 */}
-        <div className="relative overflow-hidden bg-surface-container-lowest p-space-md rounded-xl shadow-xs border border-border-subtle/40 flex flex-col justify-between">
+        <div className="bg-surface-container-lowest p-5 rounded-xl border border-border-subtle/60 flex flex-col justify-between">
           <div className="flex items-start justify-between">
             <div className="flex flex-col">
-              <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">
+              <span className="text-xs text-on-surface-variant uppercase tracking-wider font-semibold">
                 Total Mitra Terdaftar
               </span>
-              <div className="flex items-baseline gap-2 mt-1">
-                <span className="font-headline-xl text-headline-xl text-on-surface font-bold">
+              <div className="flex items-baseline gap-1.5 mt-1">
+                <span className="text-2xl text-on-surface font-bold">
                   {168 + (outlets.length - 6)}
                 </span>
-                <span className="font-label-md text-label-md text-on-surface-variant">Outlet</span>
+                <span className="text-xs text-on-surface-variant font-medium">Outlet</span>
               </div>
             </div>
-            <div className="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
-              <span className="material-symbols-outlined text-[22px]">storefront</span>
+            <div className="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+              <span className="material-symbols-outlined text-[20px]">storefront</span>
             </div>
           </div>
-          <div className="mt-4 pt-3 flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm border-t border-border-subtle/30">
-            <div className="flex items-center gap-1.5 text-status-success-text font-semibold">
-              <span className="w-2 h-2 rounded-full bg-badge-green" />
+          <div className="mt-4 pt-2.5 flex items-center justify-between text-xs text-on-surface-variant border-t border-border-subtle/40">
+            <div className="flex items-center gap-1.5 text-emerald-700 font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
               <span>148 Aktif</span>
             </div>
             <span className="text-on-surface-variant">20 Baru / Evaluasi</span>
@@ -170,73 +172,73 @@ export const B2bCrmDirectoryView: React.FC = () => {
         </div>
 
         {/* Card 2 */}
-        <div className="relative overflow-hidden bg-surface-container-lowest p-space-md rounded-xl shadow-xs border border-border-subtle/40 flex flex-col justify-between">
+        <div className="bg-surface-container-lowest p-5 rounded-xl border border-border-subtle/60 flex flex-col justify-between">
           <div className="flex items-start justify-between">
             <div className="flex flex-col">
-              <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">
+              <span className="text-xs text-on-surface-variant uppercase tracking-wider font-semibold">
                 Jaringan Apotek
               </span>
-              <div className="flex items-baseline gap-2 mt-1">
-                <span className="font-headline-xl text-headline-xl text-secondary font-bold">104</span>
-                <span className="font-label-md text-label-md text-on-surface-variant">Titik Relasi</span>
+              <div className="flex items-baseline gap-1.5 mt-1">
+                <span className="text-2xl text-primary font-bold">104</span>
+                <span className="text-xs text-on-surface-variant font-medium">Titik Relasi</span>
               </div>
             </div>
-            <div className="w-10 h-10 rounded-lg bg-secondary-fixed/50 flex items-center justify-center text-secondary">
-              <span className="material-symbols-outlined text-[22px]">medication</span>
+            <div className="w-9 h-9 rounded-lg bg-teal-50 flex items-center justify-center text-primary">
+              <span className="material-symbols-outlined text-[20px]">medication</span>
             </div>
           </div>
-          <div className="mt-4 pt-3 flex items-center justify-between font-label-sm text-label-sm border-t border-border-subtle/30">
-            <span className="text-on-surface-variant">Termin rata-rata:</span>
-            <span className="px-2 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-semibold">
+          <div className="mt-4 pt-2.5 flex items-center justify-between text-xs border-t border-border-subtle/40 text-on-surface-variant">
+            <span>Rata-rata termin:</span>
+            <span className="font-semibold text-primary">
               Net 30 Hari
             </span>
           </div>
         </div>
 
         {/* Card 3 */}
-        <div className="relative overflow-hidden bg-surface-container-lowest p-space-md rounded-xl shadow-xs border border-border-subtle/40 flex flex-col justify-between">
+        <div className="bg-surface-container-lowest p-5 rounded-xl border border-border-subtle/60 flex flex-col justify-between">
           <div className="flex items-start justify-between">
             <div className="flex flex-col">
-              <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">
+              <span className="text-xs text-on-surface-variant uppercase tracking-wider font-semibold">
                 Minimarket &amp; Ritel
               </span>
-              <div className="flex items-baseline gap-2 mt-1">
-                <span className="font-headline-xl text-headline-xl text-tertiary font-bold">64</span>
-                <span className="font-label-md text-label-md text-on-surface-variant">Supermarket/Toko</span>
+              <div className="flex items-baseline gap-1.5 mt-1">
+                <span className="text-2xl text-on-surface font-bold">64</span>
+                <span className="text-xs text-on-surface-variant font-medium">Toko</span>
               </div>
             </div>
-            <div className="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-tertiary">
-              <span className="material-symbols-outlined text-[22px]">shopping_cart</span>
+            <div className="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant">
+              <span className="material-symbols-outlined text-[20px]">shopping_cart</span>
             </div>
           </div>
-          <div className="mt-4 pt-3 flex items-center justify-between font-label-sm text-label-sm border-t border-border-subtle/30">
-            <span className="text-on-surface-variant">Termin rata-rata:</span>
-            <span className="px-2 py-0.5 rounded bg-surface-container text-primary font-semibold">
+          <div className="mt-4 pt-2.5 flex items-center justify-between text-xs border-t border-border-subtle/40 text-on-surface-variant">
+            <span>Rata-rata termin:</span>
+            <span className="font-semibold text-on-surface">
               Net 14 Hari
             </span>
           </div>
         </div>
 
         {/* Card 4 */}
-        <div className="relative overflow-hidden bg-surface-container-lowest p-space-md rounded-xl shadow-xs border border-border-subtle/40 flex flex-col justify-between">
+        <div className="bg-surface-container-lowest p-5 rounded-xl border border-border-subtle/60 flex flex-col justify-between">
           <div className="flex items-start justify-between">
             <div className="flex flex-col">
-              <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">
-                Kesehatan Kredit (Credit Health)
+              <span className="text-xs text-on-surface-variant uppercase tracking-wider font-semibold">
+                Kesehatan Kredit
               </span>
-              <div className="flex items-baseline gap-2 mt-1">
-                <span className="font-headline-xl text-headline-xl text-status-success-text font-bold">94.2%</span>
-                <span className="font-label-sm text-label-sm font-semibold text-status-success-text bg-status-success-bg px-1.5 py-0.5 rounded">
+              <div className="flex items-baseline gap-1.5 mt-1">
+                <span className="text-2xl text-emerald-700 font-bold">94.2%</span>
+                <span className="text-xs font-semibold text-emerald-700">
                   Optimal
                 </span>
               </div>
             </div>
-            <div className="w-10 h-10 rounded-lg bg-status-success-bg flex items-center justify-center text-status-success-text">
-              <span className="material-symbols-outlined text-[22px]">verified_user</span>
+            <div className="w-9 h-9 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-700">
+              <span className="material-symbols-outlined text-[20px]">verified_user</span>
             </div>
           </div>
-          <div className="mt-4 pt-3 flex items-center justify-between font-label-sm text-label-sm border-t border-border-subtle/30">
-            <span className="text-status-warning-text font-medium flex items-center gap-1">
+          <div className="mt-4 pt-2.5 flex items-center justify-between text-xs border-t border-border-subtle/40 text-on-surface-variant">
+            <span className="text-amber-700 font-medium flex items-center gap-1">
               <span className="material-symbols-outlined text-[14px]">warning</span>
               5.8% Jatuh Tempo &lt;7 hari
             </span>

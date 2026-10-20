@@ -18,8 +18,8 @@ const MainContent: React.FC = () => {
       <Header />
       <Sidebar />
 
-      {/* Main Content Area offset by fixed header and sidebar */}
-      <div className="pl-64 flex flex-col flex-grow">
+      {/* Main Content Area stays permanently expanded, sidebar overlaps statically when unfolded */}
+      <div className="pl-16 flex flex-col flex-grow">
         <main className="relative pt-16 bg-surface min-h-[calc(100vh-48px)] px-gutter-desktop py-space-lg flex-grow">
           {currentPath === 'inventory-stock-ledger' && <InventoryStockLedgerView />}
           {currentPath === 'executive-dashboard' && <ExecutiveDashboardView />}
